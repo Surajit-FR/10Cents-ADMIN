@@ -1,0 +1,275 @@
+[
+    {
+        "label": "Dashboards",
+        "icon": "feather-airplay",
+        "link": "#",
+        "submenu": [
+            {
+                "label": "CRM",
+                "link": "index.html"
+            },
+            {
+                "label": "Analytics",
+                "link": "analytics.html"
+            }
+        ]
+    },
+    {
+        "label": "Reports",
+        "icon": "feather-cast",
+        "link": "#",
+        "submenu": [
+            {
+                "label": "Sales Report",
+                "link": "reports-sales.html"
+            },
+            {
+                "label": "Leads Report",
+                "link": "reports-leads.html"
+            },
+            {
+                "label": "Project Report",
+                "link": "reports-project.html"
+            },
+            {
+                "label": "Timesheets Report",
+                "link": "reports-timesheets.html"
+            }
+        ]
+    },
+    {
+        "label": "Applications",
+        "icon": "feather-send",
+        "link": "#",
+        "submenu": [
+            {
+                "label": "Chat",
+                "link": "apps-chat.html"
+            },
+            {
+                "label": "Email",
+                "link": "apps-email.html"
+            },
+            {
+                "label": "Tasks",
+                "link": "apps-tasks.html"
+            },
+            {
+                "label": "Notes",
+                "link": "apps-notes.html"
+            },
+            {
+                "label": "Storage",
+                "link": "apps-storage.html"
+            },
+            {
+                "label": "Calendar",
+                "link": "apps-calendar.html"
+            }
+        ]
+    },
+    {
+        "label": "Proposal",
+        "icon": "feather-at-sign",
+        "link": "#",
+        "submenu": [
+            {
+                "label": "Proposal",
+                "link": "proposal.html"
+            },
+            {
+                "label": "Proposal View",
+                "link": "proposal-view.html"
+            },
+            {
+                "label": "Proposal Edit",
+                "link": "proposal-edit.html"
+            },
+            {
+                "label": "Proposal Create",
+                "link": "proposal-create.html"
+            }
+        ]
+    },
+    {
+        "label": "Payment",
+        "icon": "feather-dollar-sign",
+        "link": "#",
+        "submenu": [
+            {
+                "label": "Payment",
+                "link": "payment.html"
+            },
+            {
+                "label": "Invoice View",
+                "link": "invoice-view.html"
+            },
+            {
+                "label": "Invoice Create",
+                "link": "invoice-create.html"
+            }
+        ]
+    },
+    {
+        "label": "Customers",
+        "icon": "feather-users",
+        "link": "#",
+        "submenu": [
+            {
+                "label": "Customers",
+                "link": "customers.html"
+            },
+            {
+                "label": "Customers View",
+                "link": "customers-view.html"
+            },
+            {
+                "label": "Customers Create",
+                "link": "customers-create.html"
+            }
+        ]
+    },
+    {
+        "label": "Leads",
+        "icon": "feather-alert-circle",
+        "link": "#",
+        "submenu": [
+            {
+                "label": "Leads",
+                "link": "leads.html"
+            },
+            {
+                "label": "Leads View",
+                "link": "leads-view.html"
+            },
+            {
+                "label": "Leads Create",
+                "link": "leads-create.html"
+            }
+        ]
+    },
+    {
+        "label": "Projects",
+        "icon": "feather-briefcase",
+        "link": "#",
+        "submenu": [
+            {
+                "label": "Projects",
+                "link": "projects.html"
+            },
+            {
+                "label": "Projects View",
+                "link": "projects-view.html"
+            },
+            {
+                "label": "Projects Create",
+                "link": "projects-create.html"
+            }
+        ]
+    },
+    {
+        "label": "Widgets",
+        "icon": "feather-layout",
+        "link": "#",
+        "submenu": [
+            {
+                "label": "Lists",
+                "link": "widgets-lists.html"
+            },
+            {
+                "label": "Tables",
+                "link": "widgets-tables.html"
+            },
+            {
+                "label": "Charts",
+                "link": "widgets-charts.html"
+            },
+            {
+                "label": "Statistics",
+                "link": "widgets-statistics.html"
+            },
+            {
+                "label": "Miscellaneous",
+                "link": "widgets-miscellaneous.html"
+            }
+        ]
+    },
+    {
+        "label": "Settings",
+        "icon": "feather-settings",
+        "link": "#",
+        "submenu": [
+            {
+                "label": "General",
+                "link": "settings-general.html"
+            },
+            {
+                "label": "SEO",
+                "link": "settings-seo.html"
+            },
+            {
+                "label": "Tags",
+                "link": "settings-tags.html"
+            },
+            {
+                "label": "Email",
+                "link": "settings-email.html"
+            },
+            {
+                "label": "Tasks",
+                "link": "settings-tasks.html"
+            },
+            {
+                "label": "Leads",
+                "link": "settings-leads.html"
+            },
+            {
+                "label": "Support",
+                "link": "settings-support.html"
+            },
+            {
+                "label": "Finance",
+                "link": "settings-finance.html"
+            },
+            {
+                "label": "Gateways",
+                "link": "settings-gateways.html"
+            },
+            {
+                "label": "Customers",
+                "link": "settings-customers.html"
+            },
+            {
+                "label": "Localization",
+                "link": "settings-localization.html"
+            },
+            {
+                "label": "reCAPTCHA",
+                "link": "settings-recaptcha.html"
+            },
+            {
+                "label": "Miscellaneous",
+                "link": "settings-miscellaneous.html"
+            }
+        ]
+    },
+    {
+        "label": "Help Center",
+        "icon": "feather-life-buoy",
+        "link": "#",
+        "submenu": [
+            {
+                "label": "Support",
+                "link": "https://wrapcoders.tawk.help"
+            },
+            {
+                "label": "KnowledgeBase",
+                "link": "help-knowledgebase.html"
+            },
+            {
+                "label": "Documentations",
+                "link": "./docs/documentations.html"
+            }
+        ]
+    }
+]
