@@ -8,7 +8,7 @@ const Navbar = (): JSX.Element => {
             <nav className="nxl-navigation">
                 <div className="navbar-wrapper">
                     <div className="m-header">
-                        <Link to="index.html" className="b-brand">
+                        <Link to="/dashboard" className="b-brand">
                             <img src="./assets/images/logo.png" alt="" className="logo logo-lg" />
                             <img src="./assets/images/favicon.png" alt="" className="logo logo-sm" />
                         </Link>

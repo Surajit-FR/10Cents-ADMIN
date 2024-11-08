@@ -27,7 +27,7 @@ const UserDropdown = (): JSX.Element => {
                     <span>Profile Details</span>
                 </Link>
                 <div className="dropdown-divider"></div>
-                <Link to="./auth-login-minimal.html" className="dropdown-item">
+                <Link to="/login" className="dropdown-item">
                     <i className="feather-log-out"></i>
                     <span>Logout</span>
                 </Link>

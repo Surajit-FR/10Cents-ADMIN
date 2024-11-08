@@ -3,7 +3,7 @@ import PageHeader from "../../components/PageHeader";
 const Dashboard = (): JSX.Element => {
     return (
         <>
-            <PageHeader />
+            <PageHeader pageName="Dashboard" link="/dashboard" />
         </>
     );
 };

@@ -5,10 +5,6 @@
         "link": "#",
         "submenu": [
             {
-                "label": "CRM",
-                "link": "#"
-            },
-            {
                 "label": "Analytics",
                 "link": "#"
             }

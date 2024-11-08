@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Login = (): JSX.Element => {
     return (
         <>
@@ -5,9 +7,9 @@ const Login = (): JSX.Element => {
                 <div className="auth-minimal-inner">
                     <div className="minimal-card-wrapper">
                         <div className="card mb-4 mt-5 mx-4 mx-sm-0 position-relative">
-                            <div className="wd-50 bg-white p-2 rounded-circle shadow-lg position-absolute translate-middle top-0 start-50">
+                            <Link to="/dashboard" className="wd-50 bg-white p-2 rounded-circle shadow-lg position-absolute translate-middle top-0 start-50">
                                 <img src="./assets/images/favicon.png" alt="" className="img-fluid" />
-                            </div>
+                            </Link>
                             <div className="card-body p-sm-5">
                                 <h2 className="fs-20 fw-bolder mb-4">Login</h2>
                                 <h4 className="fs-13 fw-bold mb-2">Login to your account</h4>
