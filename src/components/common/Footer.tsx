@@ -5,10 +5,7 @@ const Footer = (): JSX.Element => {
         <>
             <footer className="footer">
                 <p className="fs-11 text-muted fw-medium text-uppercase mb-0 copyright">
-                    <span>Copyright ©</span>
-                    <script>
-                        document.write(new Date().getFullYear());
-                    </script>
+                    <span>Copyright ©</span> {new Date().getFullYear()}
                 </p>
                 <div className="d-flex align-items-center gap-4">
                     <Link to="#" className="fs-11 fw-semibold text-uppercase">Help</Link>

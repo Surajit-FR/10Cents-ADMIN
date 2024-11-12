@@ -1,0 +1,42 @@
+[
+    {
+        "iconClass": "feather-dollar-sign",
+        "count": "45/76",
+        "title": "Invoices Awaiting Payment",
+        "progressTitle": "Invoices Awaiting",
+        "value": "$5,569",
+        "percentage": "56%",
+        "progressBarClass": "bg-primary",
+        "progressWidth": "56%"
+    },
+    {
+        "iconClass": "feather-cast",
+        "count": "48/86",
+        "title": "Converted Leads",
+        "progressTitle": "Converted Leads",
+        "value": "52 Completed",
+        "percentage": "63%",
+        "progressBarClass": "bg-warning",
+        "progressWidth": "63%"
+    },
+    {
+        "iconClass": "feather-briefcase",
+        "count": "16/20",
+        "title": "Projects In Progress",
+        "progressTitle": "Projects In Progress",
+        "value": "16 Completed",
+        "percentage": "78%",
+        "progressBarClass": "bg-success",
+        "progressWidth": "78%"
+    },
+    {
+        "iconClass": "feather-activity",
+        "count": "46.59%",
+        "title": "Conversion Rate",
+        "progressTitle": "Conversion Rate",
+        "value": "$2,254",
+        "percentage": "46%",
+        "progressBarClass": "bg-danger",
+        "progressWidth": "46%"
+    }
+]

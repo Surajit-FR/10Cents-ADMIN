@@ -1,4 +1,4 @@
-// import Footer from "./components/common/Footer";
+import Footer from "./components/common/Footer";
 import Header from "./components/common/Header";
 import Navbar from "./components/common/Navbar";
 import AllRoutes from "./routes/AllRoutes";
@@ -15,7 +15,7 @@ const App = (): JSX.Element => {
           <AllRoutes />
         </div>
 
-        {/* <Footer /> */}
+        <Footer />
       </main>
     </>
   );

@@ -2,42 +2,19 @@
     {
         "label": "Dashboards",
         "icon": "feather-airplay",
-        "link": "#",
-        "submenu": [
-            {
-                "label": "Analytics",
-                "link": "#"
-            }
-        ]
+        "link": "/dashboard",
+        "submenu": []
     },
     {
         "label": "Customers",
         "icon": "feather-users",
-        "link": "#",
-        "submenu": [
-            {
-                "label": "Customers",
-                "link": "#"
-            }
-        ]
+        "link": "/customers",
+        "submenu": []
     },
     {
         "label": "Help Center",
         "icon": "feather-life-buoy",
-        "link": "#",
-        "submenu": [
-            {
-                "label": "Support",
-                "link": "https://wrapcoders.tawk.help"
-            },
-            {
-                "label": "KnowledgeBase",
-                "link": "help-#"
-            },
-            {
-                "label": "Documentations",
-                "link": "./docs/#"
-            }
-        ]
+        "link": "/help-center",
+        "submenu": []
     }
 ]

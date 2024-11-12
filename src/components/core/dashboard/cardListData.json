@@ -1,0 +1,32 @@
+[
+    {
+        "iconClass": "feather feather-star",
+        "title": "Tasks Completed",
+        "status": "22/35 completed",
+        "mainCount": "22/35",
+        "chartId": "task-completed-area-chart",
+        "percentageChange": "28% more",
+        "changeColorClass": "text-primary",
+        "description": "from last week"
+    },
+    {
+        "iconClass": "feather feather-file-text",
+        "title": "New Tasks",
+        "status": "0/20 tasks",
+        "mainCount": "5/20",
+        "chartId": "new-tasks-area-chart",
+        "percentageChange": "34% more",
+        "changeColorClass": "text-success",
+        "description": "from last week"
+    },
+    {
+        "iconClass": "feather feather-airplay",
+        "title": "Project Done",
+        "status": "20/30 project",
+        "mainCount": "20/30",
+        "chartId": "project-done-area-chart",
+        "percentageChange": "42% more",
+        "changeColorClass": "text-danger",
+        "description": "from last week"
+    }
+]
