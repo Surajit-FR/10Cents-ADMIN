@@ -1,6 +1,16 @@
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, NavigateFunction, useNavigate } from "react-router-dom";
+import { AppDispatch } from "../../store/Store";
+import { AuthLogoutRequest } from "../../store/reducers/AuthReducers";
 
 const UserDropdown = (): JSX.Element => {
+    const dispatch: AppDispatch = useDispatch();
+    const navigate: NavigateFunction = useNavigate();
+
+    const userLogout = () => {
+        dispatch(AuthLogoutRequest({ navigate }));
+    };
+
     return (
         <>
             <div className="dropdown-menu dropdown-menu-end nxl-h-dropdown nxl-user-dropdown">
@@ -27,7 +37,7 @@ const UserDropdown = (): JSX.Element => {
                     <span>Profile Details</span>
                 </Link>
                 <div className="dropdown-divider"></div>
-                <Link to="/login" className="dropdown-item">
+                <Link to="#" className="dropdown-item" onClick={userLogout}>
                     <i className="feather-log-out"></i>
                     <span>Logout</span>
                 </Link>

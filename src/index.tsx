@@ -6,13 +6,20 @@ import Login from './pages/auth/Login';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ThemeCustomizer from './components/ThemeCustomizer';
 import Index from './pages/Index';
+import PublicRouteAccess from './routes/PublicRouteAccess';
+import PrivateOne from './routes/private/PrivateOne';
+import { Provider } from 'react-redux';
+import { store } from './store/Store';
+import { Toaster } from 'react-hot-toast';
 
 const router = createBrowserRouter([
   {
     path: '*',
     element: (
       <>
-        <App />
+        <PrivateOne>
+          <App />
+        </PrivateOne>
         <ThemeCustomizer />
       </>
     ),
@@ -23,7 +30,12 @@ const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <Login />,
+    element:
+      (
+        <PublicRouteAccess>
+          <Login />
+        </PublicRouteAccess>
+      ),
   },
 ], {
   future: {
@@ -40,7 +52,14 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <RouterProvider router={router} future={{ v7_startTransition: true }} />
+  <Provider store={store}>
+    <RouterProvider router={router} future={{ v7_startTransition: true }} />
+    <Toaster
+      position='top-center'
+      reverseOrder={false}
+      gutter={10}
+    />
+  </Provider>
 );
 
 reportWebVitals();
