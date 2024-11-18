@@ -1,4 +1,5 @@
 import { User, UserData } from "./authTypes";
+import { GetAllUsersResponse } from "./userTypes";
 
 export type TNavItems = {
     label: string;
@@ -12,7 +13,7 @@ export type TNavItems = {
 
 export type DataState = {
     authData?: Partial<UserData>,
-    userData?: Partial<User>,
+    userData?: Partial<GetAllUsersResponse>,
     error: string | null,
     type: string,
 };

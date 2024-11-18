@@ -13,3 +13,5 @@ setupInterceptors();
 export const LOGIN = (data: TLoginCredentials) => API.post("/auth/signin", data);
 // Logout
 export const LOGOUT = () => API.post("/auth/logout");
+// Get all users
+export const GETALLUSERS = () => API.get("/user");

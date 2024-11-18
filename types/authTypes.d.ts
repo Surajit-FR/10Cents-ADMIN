@@ -16,6 +16,7 @@ export type User = {
     _id: string;
     firstName: string;
     lastName: string;
+    username: string;
     email: string;
     phone: string;
     avatar: string;
@@ -23,8 +24,7 @@ export type User = {
     userType: string;
     createdAt: string;
     updatedAt: string;
-    additionalInfo: Array<AdditionalInfo>;
-    userAddress: Array<UserAddress>;
+    __v: number;
 };
 
 export type UserData = {

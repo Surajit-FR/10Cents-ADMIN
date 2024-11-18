@@ -1,248 +1,125 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import PageHeader from "../../components/PageHeader";
-import Select from 'react-select';
+import $ from "jquery";
+import axios from "axios";
+import "datatables.net";
+import "datatables.net-bs5";
+import "datatables.net-responsive";
+import "datatables.net-buttons-bs5";
+import "datatables.net-buttons/js/buttons.html5";
 
-const customersData = [
-    {
-        id: 1,
-        name: "Alexandra Della",
-        email: "alex.della@outlook.com",
-        phone: "+1 (375) 9632 548",
-        date: "2023-04-05, 00:05PM",
-        avatar: "./assets/images/avatar/1.png",
-        groupOptions: [
-            { value: "success", label: "VIP" },
-            { value: "info", label: "Bugs" },
-            { value: "primary", label: "Team" },
-            { value: "teal", label: "Primary" },
-            { value: "success", label: "Updates" },
-            { value: "warning", label: "Personal" },
-            { value: "danger", label: "Promotions", selected: true },
-            { value: "indigo", label: "Customs" },
-            { value: "primary", label: "Wholesale" },
-            { value: "danger", label: "Low Budget" },
-            { value: "teal", label: "High Budget", selected: true },
-        ],
-        status: "Active"
-    },
-    {
-        id: 2,
-        name: "Nancy Elliot",
-        email: "nancy.elliot@outlook.com",
-        phone: "(375) 8523 456",
-        date: "2023-04-06, 02:52PM",
-        avatar: null, // No image, use initials
-        groupOptions: [
-            { value: "success", label: "VIP" },
-            { value: "info", label: "Bugs" },
-            { value: "primary", label: "Team" },
-            { value: "teal", label: "Primary" },
-            { value: "success", label: "Updates" },
-            { value: "warning", label: "Personal" },
-            { value: "danger", label: "Promotions", selected: true },
-            { value: "indigo", label: "Customs" },
-            { value: "primary", label: "Wholesale", selected: true },
-            { value: "danger", label: "Low Budget", selected: true },
-            { value: "teal", label: "High Budget" },
-        ],
-        status: "Active"
-    }
-];
+// Import DataTable styles from node_modules
+import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
+import "datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css";
+import "datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css";
+import "datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css";
+import "datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css";
+import "datatables.net-select-bs5/css/select.bootstrap5.min.css";
 
-const statusOptions = [
-    { value: 'active', label: 'Active', className: 'bg-success' },
-    { value: 'inactive', label: 'Inactive', className: 'bg-warning' },
-    { value: 'declined', label: 'Declined', className: 'bg-danger' }
-];
-
-const customStyles = {
-    menu: (base: any) => ({
-        ...base,
-        maxHeight: 200,
-    }),
-    option: (base: any, state: { isSelected: any; isFocused: any; }) => ({
-        ...base,
-        backgroundColor: state.isSelected ? '#3498db' : state.isFocused ? '#f0f0f0' : '#fff',
-        color: state.isSelected ? '#fff' : '#000',
-        cursor: 'pointer',
-    }),
-    singleValue: (base: any) => ({
-        ...base,
-        color: '#000',
-    }),
-    dropdownIndicator: (base: any) => ({
-        ...base,
-        color: '#3498db',
-    }),
-    indicatorSeparator: (base: any) => ({
-        ...base,
-        backgroundColor: '#3498db',
-    }),
-};
+import { debounce } from "lodash";
+import { REACT_APP_BASE_URL } from "../../config/app.config";
+import DataCards from "../../components/core/customer/DataCards";
 
 const Customers = (): JSX.Element => {
+    useEffect(() => {
+        // Initialize DataTable
+        const table = $('#datatable-buttons').DataTable({
+            responsive: true,
+            fixedHeader: true,
+            fixedColumns: true,
+            select: true,
+            pagingType: 'full_numbers', // Custom pagination (First, Previous, Next, Last)
+            dom: '<"top d-flex justify-content-between align-items-center"lf>rt<"bottom"ip><"clear">', // Table structure (search, pagination, etc.)
+            serverSide: true,
+            processing: true,
+            ajax: async (data: any, callback: Function) => {
+                try {
+                    const params = {
+                        page: data.start / data.length + 1,
+                        limit: data.length,
+                        query: data.search.value || '',
+                        sortBy: data.columns[data.order[0].column].data,
+                        sortType: data.order[0].dir,
+                    };
+
+                    const response = await axios.get(`${REACT_APP_BASE_URL}/user`, {
+                        params,
+                        withCredentials: true,
+                    });
+
+                    const userData = response.data.data.userData.map((item: any) => [
+                        `${item?.firstName} ${item?.lastName}`,
+                        item?.email || '-- --',
+                        item?.phone || '-- --',
+                        new Date(item?.createdAt).toLocaleDateString() || '-- --',
+                        item?._id,
+                    ]);
+
+                    const totalRecords = response.data.data.pagination.total;
+
+                    callback({
+                        draw: data.draw,
+                        recordsTotal: totalRecords,
+                        recordsFiltered: totalRecords,
+                        data: userData,
+                    });
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            },
+            columns: [
+                { title: "Name" },
+                { title: "Email" },
+                { title: "Phone" },
+                { title: "Date Registered" },
+            ],
+        });
+
+        // Debounced search functionality
+        const debouncedSearch = debounce((value: string) => {
+            table.search(value).draw();
+        }, 600);
+
+        const searchInput = $('#datatable-buttons_filter input');
+
+        searchInput.off('input');
+        searchInput.on('input', function () {
+            const searchValue = $(this).val();
+            if (searchValue !== null) {
+                debouncedSearch(searchValue as string);
+            }
+        });
+
+        // Clean up the event listeners and DataTable instance on unmount
+        return () => {
+            searchInput.off('input');
+            $('#datatable-buttons tbody').off('click', '.action-button');
+            table.destroy();
+        };
+    }, []);
 
     return (
         <>
             <PageHeader pageName="Customers" link="/dashboard" />
-
-            <div id="collapseOne" className="accordion-collapse collapse page-header-collapse">
-                <div className="accordion-body pb-2">
-                    <div className="row">
-                        <div className="col-xxl-3 col-md-6">
-                            <div className="card stretch stretch-full">
-                                <div className="card-body">
-                                    <div className="d-flex align-items-center justify-content-between">
-                                        <div className="d-flex align-items-center gap-3">
-                                            <div className="avatar-text avatar-xl rounded">
-                                                <i className="feather-users"></i>
-                                            </div>
-                                            <Link to="#" className="fw-bold d-block">
-                                                <span className="text-truncate-1-line">Total Customers</span>
-                                                <span className="fs-24 fw-bolder d-block">26,595</span>
-                                            </Link>
-                                        </div>
-                                        <div className="badge bg-soft-success text-success">
-                                            <i className="feather-arrow-up fs-10 me-1"></i>
-                                            <span>36.85%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xxl-3 col-md-6">
-                            <div className="card stretch stretch-full">
-                                <div className="card-body">
-                                    <div className="d-flex align-items-center justify-content-between">
-                                        <div className="d-flex align-items-center gap-3">
-                                            <div className="avatar-text avatar-xl rounded">
-                                                <i className="feather-user-check"></i>
-                                            </div>
-                                            <Link to="#" className="fw-bold d-block">
-                                                <span className="text-truncate-1-line">Active Customers</span>
-                                                <span className="fs-24 fw-bolder d-block">2,245</span>
-                                            </Link>
-                                        </div>
-                                        <div className="badge bg-soft-danger text-danger">
-                                            <i className="feather-arrow-down fs-10 me-1"></i>
-                                            <span>24.56%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xxl-3 col-md-6">
-                            <div className="card stretch stretch-full">
-                                <div className="card-body">
-                                    <div className="d-flex align-items-center justify-content-between">
-                                        <div className="d-flex align-items-center gap-3">
-                                            <div className="avatar-text avatar-xl rounded">
-                                                <i className="feather-user-plus"></i>
-                                            </div>
-                                            <Link to="#" className="fw-bold d-block">
-                                                <span className="text-truncate-1-line">New Customers</span>
-                                                <span className="fs-24 fw-bolder d-block">1,254</span>
-                                            </Link>
-                                        </div>
-                                        <div className="badge bg-soft-success text-success">
-                                            <i className="feather-arrow-up fs-10 me-1"></i>
-                                            <span>33.29%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xxl-3 col-md-6">
-                            <div className="card stretch stretch-full">
-                                <div className="card-body">
-                                    <div className="d-flex align-items-center justify-content-between">
-                                        <div className="d-flex align-items-center gap-3">
-                                            <div className="avatar-text avatar-xl rounded">
-                                                <i className="feather-user-minus"></i>
-                                            </div>
-                                            <Link to="#" className="fw-bold d-block">
-                                                <span className="text-truncate-1-line">Inactive Customers</span>
-                                                <span className="fs-24 fw-bolder d-block">4,586</span>
-                                            </Link>
-                                        </div>
-                                        <div className="badge bg-soft-danger text-danger">
-                                            <i className="feather-arrow-down fs-10 me-1"></i>
-                                            <span>42.47%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <DataCards />
 
             <div className="main-content">
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="card stretch stretch-full">
-                            <div className="card-body p-0">
+                            <div className="card-body">
                                 <div className="table-responsive">
-                                    <table className="table table-hover" id="customerList">
+                                    <table id="datatable-buttons" className="table table-striped dt-responsive nowrap w-100">
                                         <thead>
                                             <tr>
-                                                <th className="wd-30">
-                                                    <div className="custom-control custom-checkbox ms-1">
-                                                        <input type="checkbox" className="custom-control-input" id="checkAllCustomer" />
-                                                        <label className="custom-control-label" htmlFor="checkAllCustomer"></label>
-                                                    </div>
-                                                </th>
                                                 <th>Customer</th>
                                                 <th>Email</th>
                                                 <th>Phone</th>
-                                                <th>Date</th>
-                                                <th>Status</th>
+                                                <th>Date Registered</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {customersData.map((customer) => (
-                                                <tr key={customer.id} className="single-item">
-                                                    <td>
-                                                        <div className="custom-control custom-checkbox ms-1">
-                                                            <input type="checkbox" className="custom-control-input checkbox" id={`checkBox_${customer.id}`} />
-                                                            <label className="custom-control-label" htmlFor={`checkBox_${customer.id}`}></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <Link to="customers-view.html" className="hstack gap-3">
-                                                            {customer.avatar ? (
-                                                                <div className="avatar-image avatar-md">
-                                                                    <img src={customer.avatar} alt="" className="img-fluid" />
-                                                                </div>
-                                                            ) : (
-                                                                <div className="avatar-image avatar-md bg-warning text-white">
-                                                                    {customer.name.charAt(0)}
-                                                                </div>
-                                                            )}
-                                                            <div>
-                                                                <span className="text-truncate-1-line">{customer.name}</span>
-                                                            </div>
-                                                        </Link>
-                                                    </td>
-                                                    <td><Link to="apps-email.html">{customer.email}</Link></td>
-                                                    <td><Link to="tel:">{customer.phone}</Link></td>
-                                                    <td>{customer.date}</td>
-                                                    <td>
-                                                        <Select
-                                                            className="react-select"
-                                                            options={statusOptions}
-                                                            defaultValue={statusOptions.find(option => option.value.toLowerCase() === customer.status.toLowerCase())}
-                                                            onChange={(selectedOption) => {
-                                                                // Handle status change here
-                                                                console.log(`Status changed to: ${selectedOption?.label}`);
-                                                            }}
-                                                            classNamePrefix="react-select"
-                                                            styles={customStyles} // Apply custom styles
-                                                            isSearchable={true} // Enable search functionality
-                                                        />
-                                                    </td>
-                                                </tr>
-                                            ))}
+                                            {/* Data will be populated by DataTable */}
                                         </tbody>
                                     </table>
                                 </div>
