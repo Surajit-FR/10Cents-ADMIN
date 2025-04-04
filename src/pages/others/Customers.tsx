@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import PageHeader from "../../components/PageHeader";
 import $ from "jquery";
-import axios from "axios";
 import "datatables.net";
 import "datatables.net-bs5";
 import "datatables.net-responsive";
@@ -17,11 +16,16 @@ import "datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css";
 import "datatables.net-select-bs5/css/select.bootstrap5.min.css";
 
 import { debounce } from "lodash";
-import { REACT_APP_BASE_URL } from "../../config/app.config";
 import DataCards from "../../components/core/customer/DataCards";
+import { API } from "../../store/api/Api";
+import { useNavigate } from "react-router-dom";
 
 const Customers = (): JSX.Element => {
+    const navigate = useNavigate();
     useEffect(() => {
+        const handleViewDetails = (id: string) => {
+            navigate(`/profile/${id}`);
+        };
         // Initialize DataTable
         const table = $('#datatable-buttons').DataTable({
             responsive: true,
@@ -42,7 +46,7 @@ const Customers = (): JSX.Element => {
                         sortType: data.order[0].dir,
                     };
 
-                    const response = await axios.get(`${REACT_APP_BASE_URL}/user`, {
+                    const response = await API.get(`/user/get-all-customer`, {
                         params,
                         withCredentials: true,
                     });
@@ -52,7 +56,8 @@ const Customers = (): JSX.Element => {
                         item?.email || '-- --',
                         item?.phone || '-- --',
                         new Date(item?.createdAt).toLocaleDateString() || '-- --',
-                        item?._id,
+                        `<button class="btn btn-primary btn-sm view-details dt-head-center dt-body-center" data-id="${item._id}">View Details</button>`,
+                        // item?._id,
                     ]);
 
                     const totalRecords = response.data.data.pagination.total;
@@ -68,13 +73,22 @@ const Customers = (): JSX.Element => {
                 }
             },
             columns: [
-                { title: "Name" },
-                { title: "Email" },
-                { title: "Phone" },
-                { title: "Date Registered" },
+                { title: "Name", orderable: false },
+                { title: "Email", orderable: false },
+                { title: "Phone", orderable: false },
+                { title: "Date Registered", orderable: false },
+                { title: "View", orderable: false },
+            ],
+            "columnDefs": [
+                { "className": "dt-body-left dt-head-left", "targets": "_all" }
             ],
         });
+        // handle details users views
 
+        $('#datatable-buttons').on('click', '.view-details', function () {
+            const id = $(this).data('id');
+            handleViewDetails(id);
+        });
         // Debounced search functionality
         const debouncedSearch = debounce((value: string) => {
             table.search(value).draw();
@@ -96,7 +110,7 @@ const Customers = (): JSX.Element => {
             $('#datatable-buttons tbody').off('click', '.action-button');
             table.destroy();
         };
-    }, []);
+    }, [navigate]);
 
     return (
         <>
@@ -109,7 +123,7 @@ const Customers = (): JSX.Element => {
                         <div className="card stretch stretch-full">
                             <div className="card-body">
                                 <div className="table-responsive">
-                                    <table id="datatable-buttons" className="table table-striped dt-responsive nowrap w-100">
+                                    <table id="datatable-buttons" className="table table-striped dt-responsive nowrap w-100 dt-head-left dt-body-left">
                                         <thead>
                                             <tr>
                                                 <th>Customer</th>

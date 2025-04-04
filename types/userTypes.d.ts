@@ -10,3 +10,7 @@ export type GetAllUsersResponse = {
     userData: Array<User>;
     pagination: Pagination;
 };
+export type GetSingleUserResponse = {
+    userData: User;
+    pagination: Pagination;
+};

@@ -16,6 +16,7 @@ export type DataState = {
     userData?: Partial<GetAllUsersResponse>,
     error: string | null,
     type: string,
+    singleUserData?: Partial<User>
 };
 
 export type SagaGenerator<Y, R = void> = Generator<CallEffect<Y> | PutEffect | SelectEffect | TakeEffect, R, Y>;

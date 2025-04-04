@@ -14,4 +14,13 @@ export const LOGIN = (data: TLoginCredentials) => API.post("/auth/signin", data)
 // Logout
 export const LOGOUT = () => API.post("/auth/logout");
 // Get all users
-export const GETALLUSERS = () => API.get("/user");
+export const GETALLUSERS = () => API.get("/user/get-all-customer");
+export const GETSINGLEUSERDETAILS =(userId: string)=> {
+    return API({
+        url:'user/get-single-user',
+        method:'get',
+        params:{
+            userId,
+        }
+    })
+}
