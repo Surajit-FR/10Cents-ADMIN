@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '../../store/Store'
+import { useDispatch,
+    //  useSelector 
+    } from 'react-redux'
+import { AppDispatch,
+    //  RootState 
+    } from '../../store/Store'
 import { GetSingleUserRequest } from '../../store/reducers/UserReducers'
 import { useParams } from 'react-router-dom'
 import { Link } from "react-router-dom";
@@ -10,14 +14,13 @@ const Profile = () => {
     const { id  } = useParams();
     // const userId = localStorage.getItem("_id") 
     const dispatch = useDispatch<AppDispatch>()
-    const {singleUserData} = useSelector((state: RootState)=> state.userSlice)
+    // const {singleUserData} = useSelector((state: RootState)=> state.userSlice)
 
     useEffect(()=>{
         if(id){
             dispatch(GetSingleUserRequest({userId:id}))
         }
     },[id, dispatch])
-    console.log({singleUserData})
   return (
      <div className="card-body custom-card-action p-0">
                             <div className="table-responsive">

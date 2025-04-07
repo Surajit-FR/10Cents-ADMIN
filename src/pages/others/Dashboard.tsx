@@ -11,8 +11,19 @@ import LatestLeads from "../../components/core/dashboard/LatestLeads";
 import UpcomingSchedule from "../../components/core/dashboard/UpcomingSchedule";
 import ProjectStatus from "../../components/core/dashboard/ProjectStatus";
 import TeamProgress from "../../components/core/dashboard/TeamProgress";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store/Store";
+import { useEffect } from "react";
+import { GetAllUserRequest } from "../../store/reducers/UserReducers";
 
 const Dashboard = (): JSX.Element => {
+    const dispatch = useDispatch<AppDispatch>()
+    const {userData} = useSelector((state: RootState)=> state.userSlice)
+
+    useEffect(()=>{
+        dispatch(GetAllUserRequest("userSlice/GetAllUserRequest"))
+    },[dispatch])
+
     return (
         <>
             <PageHeader pageName="Dashboard" link="/dashboard" />
@@ -52,7 +63,10 @@ const Dashboard = (): JSX.Element => {
                     <LeadsOverview />
 
                     {/* Latest Leads Section */}
-                    <LatestLeads />
+                    {userData &&userData.userData && userData.userData.length>0 && (
+
+                    <LatestLeads userData={userData}/>
+                    )}
 
                     {/* Upcoming Schedule Section */}
                     <UpcomingSchedule />
