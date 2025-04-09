@@ -24,3 +24,4 @@ export const GETSINGLEUSERDETAILS =(userId: string)=> {
         }
     })
 }
+export const GETALLIPS =()=> API.get("/ip-logs")

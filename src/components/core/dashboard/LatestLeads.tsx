@@ -11,7 +11,7 @@ const LatestLeads = ({userData}:Props): JSX.Element => {
             <div className="col-xxl-8">
                 <div className="card stretch stretch-full">
                     <div className="card-header">
-                        <h5 className="card-title">Latest Customers</h5>
+                        <h5 className="card-title">Latest Leeds</h5>
                         <div className="card-header-action">
                             <div className="card-header-btn">
                                 <div data-bs-toggle="tooltip" title="Delete">

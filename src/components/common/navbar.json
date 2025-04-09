@@ -12,6 +12,12 @@
         "submenu": []
     },
     {
+        "label": "Ip Logs",
+        "icon": "feather-life-buoy",
+        "link": "/logs",
+        "submenu": []
+    },
+    {
         "label": "Help Center",
         "icon": "feather-life-buoy",
         "link": "/help-center",
