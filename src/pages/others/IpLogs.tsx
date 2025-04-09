@@ -26,12 +26,6 @@ const IpLogs = () => {
     <>
       <PageHeader pageName="Ip Logs" link="/dashboard" />
 
-      {/* <Form.Select className="w-auto" aria-label="Sections" size="sm">
-        <option>Sections</option>
-        <option value="10">10</option>
-        <option value="25">25</option>
-        <option value="50">50</option>
-      </Form.Select> */}
 
       <div className="d-flex align-items-center gap-2">
             <span className="text-muted">Show</span>
@@ -113,25 +107,6 @@ const IpLogs = () => {
 
     
 
-    {/* <div className="d-flex justify-content-end mt-3">
-      <Pagination size='sm'>
-        <Pagination.First />
-        <Pagination.Prev />
-        <Pagination.Item>{1}</Pagination.Item>
-        <Pagination.Ellipsis />
-
-        <Pagination.Item>{10}</Pagination.Item>
-        <Pagination.Item>{11}</Pagination.Item>
-        <Pagination.Item active>{12}</Pagination.Item>
-        <Pagination.Item>{13}</Pagination.Item>
-        <Pagination.Item disabled>{14}</Pagination.Item>
-
-        <Pagination.Ellipsis />
-        <Pagination.Item>{20}</Pagination.Item>
-        <Pagination.Next />
-        <Pagination.Last />
-      </Pagination>
-    </div> */}
 
 
     <div className="d-flex justify-content-between align-items-center mt-3">
@@ -153,7 +128,7 @@ const IpLogs = () => {
         <Pagination.Item active>{currentPage}</Pagination.Item>
         <Pagination.Item onClick={() => setCurrentPage(13)}>13</Pagination.Item>
         <Pagination.Item onClick={() => setCurrentPage(14)}>14</Pagination.Item>
-        {/* <Pagination.Item disabled>14</Pagination.Item> */}
+        <Pagination.Item disabled>14</Pagination.Item>
 
         <Pagination.Ellipsis />
         <Pagination.Item onClick={() => setCurrentPage(totalPages)}>{totalPages}</Pagination.Item>

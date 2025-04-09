@@ -1,176 +1,111 @@
-import React, { useEffect } from 'react'
-import { useDispatch,
-    //  useSelector 
-    } from 'react-redux'
-import { AppDispatch,
-    //  RootState 
-    } from '../../store/Store'
-import { GetSingleUserRequest } from '../../store/reducers/UserReducers'
-import { useParams } from 'react-router-dom'
-import { Link } from "react-router-dom";
+import { Card, Row, Col, Table, Pagination } from 'react-bootstrap';
+import { useState } from 'react';
 
+const Profile = (): JSX.Element => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = 27;
 
-const Profile = () => {
-    const { id  } = useParams();
-    // const userId = localStorage.getItem("_id") 
-    const dispatch = useDispatch<AppDispatch>()
-    // const {singleUserData} = useSelector((state: RootState)=> state.userSlice)
-
-    useEffect(()=>{
-        if(id){
-            dispatch(GetSingleUserRequest({userId:id}))
-        }
-    },[id, dispatch])
   return (
-     <div className="card-body custom-card-action p-0">
-                            <div className="table-responsive">
-                                <table className="table table-hover mb-0">
-                                    <thead>
-                                        <tr className="border-b">
-                                            <th scope="row">Users</th>
-                                            <th>Proposal</th>
-                                            <th>Date</th>
-                                            <th>Status</th>
-                                            <th className="text-end">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div className="d-flex align-items-center gap-3">
-                                                    <div className="avatar-image">
-                                                        <img src="./assets/images/avatar/2.png" alt=""
-                                                            className="img-fluid" />
-                                                    </div>
-                                                    <Link to="#">
-                                                        <span className="d-block">Archie Cantones</span>
-                                                        <span
-                                                            className="fs-12 d-block fw-normal text-muted">arcie.tones@gmail.com</span>
-                                                    </Link>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span className="badge bg-gray-200 text-dark">Sent</span>
-                                            </td>
-                                            <td>11/06/2023 10:53</td>
-                                            <td>
-                                                <span className="badge bg-soft-success text-success">Completed</span>
-                                            </td>
-                                            <td className="text-end">
-                                                <Link to="#"><i
-                                                    className="feather-more-vertical"></i></Link>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div className="d-flex align-items-center gap-3">
-                                                    <div className="avatar-image">
-                                                        <img src="./assets/images/avatar/3.png" alt=""
-                                                            className="img-fluid" />
-                                                    </div>
-                                                    <Link to="#">
-                                                        <span className="d-block">Holmes Cherryman</span>
-                                                        <span
-                                                            className="fs-12 d-block fw-normal text-muted">golms.chan@gmail.com</span>
-                                                    </Link>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span className="badge bg-gray-200 text-dark">New</span>
-                                            </td>
-                                            <td>11/06/2023 10:53</td>
-                                            <td>
-                                                <span className="badge bg-soft-primary text-primary">In Progress </span>
-                                            </td>
-                                            <td className="text-end">
-                                                <Link to="#"><i
-                                                    className="feather-more-vertical"></i></Link>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div className="d-flex align-items-center gap-3">
-                                                    <div className="avatar-image">
-                                                        <img src="./assets/images/avatar/4.png" alt=""
-                                                            className="img-fluid" />
-                                                    </div>
-                                                    <Link to="#">
-                                                        <span className="d-block">Malanie Hanvey</span>
-                                                        <span
-                                                            className="fs-12 d-block fw-normal text-muted">lanie.nveyn@gmail.com</span>
-                                                    </Link>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span className="badge bg-gray-200 text-dark">Sent</span>
-                                            </td>
-                                            <td>11/06/2023 10:53</td>
-                                            <td>
-                                                <span className="badge bg-soft-success text-success">Completed</span>
-                                            </td>
-                                            <td className="text-end">
-                                                <Link to="#"><i
-                                                    className="feather-more-vertical"></i></Link>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div className="d-flex align-items-center gap-3">
-                                                    <div className="avatar-image">
-                                                        <img src="./assets/images/avatar/5.png" alt=""
-                                                            className="img-fluid" />
-                                                    </div>
-                                                    <Link to="#">
-                                                        <span className="d-block">Kenneth Hune</span>
-                                                        <span
-                                                            className="fs-12 d-block fw-normal text-muted">nneth.une@gmail.com</span>
-                                                    </Link>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span className="badge bg-gray-200 text-dark">Returning</span>
-                                            </td>
-                                            <td>11/06/2023 10:53</td>
-                                            <td>
-                                                <span className="badge bg-soft-warning text-warning">Not
-                                                    Interested</span>
-                                            </td>
-                                            <td className="text-end">
-                                                <Link to="#"><i
-                                                    className="feather-more-vertical"></i></Link>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div className="d-flex align-items-center gap-3">
-                                                    <div className="avatar-image">
-                                                        <img src="./assets/images/avatar/6.png" alt=""
-                                                            className="img-fluid" />
-                                                    </div>
-                                                    <Link to="#">
-                                                        <span className="d-block">Valentine Maton</span>
-                                                        <span
-                                                            className="fs-12 d-block fw-normal text-muted">alenine.aton@gmail.com</span>
-                                                    </Link>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span className="badge bg-gray-200 text-dark">Sent</span>
-                                            </td>
-                                            <td>11/06/2023 10:53</td>
-                                            <td>
-                                                <span className="badge bg-soft-success text-success">Completed</span>
-                                            </td>
-                                            <td className="text-end">
-                                                <Link to="#"><i
-                                                    className="feather-more-vertical"></i></Link>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-  )
-}
+    <Card className="p-4">
+      <h5 className="mb-4">CUSTOMER INFORMATION</h5>
+      <Row>
+        {/* Left Column - Circular Placeholder Image */}
+        <Col md={2}>
+          <div
+            className="border rounded-circle mt-3"
+            style={{
+              width: 150,
+              height: 150,
+              backgroundColor: '#f0f0f0',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              overflow: 'hidden',
+            }}
+          >
+            150 x 150
+          </div>
+        </Col>
 
-export default Profile
+        {/* Middle Column - Customer Info (moved from right column) */}
+        <Col md={4}>
+          <p><strong>Name:</strong> Arpan Ghosh</p>
+          <p><strong>Email:</strong> arpan@gmail.com</p>
+          <p><strong>Phone:</strong> +911000000000</p>
+          <p><strong>Registered Date:</strong> 09/04/2025</p>
+        </Col>
+
+        {/* Right Column - Empty or Reserved for future use */}
+        <Col md={4}></Col>
+      </Row>
+
+      {/* Bootstrap Table added below all sections */}
+      <Row className="mt-4">
+        <Col>
+          <h4 className='m-4'>Booking Details</h4>
+
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Booking ID</th>
+                <th>Service</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Technician</th>
+                <th>Amount</th>
+                <th>Payment Status</th>
+                <th>Feedback</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Array.from({ length: 18 }).map((_, index) => (
+                <tr key={index}>
+                  <td>ID-{index + 1}</td>
+                  <td>Service {index + 1}</td>
+                  <td>{index % 2 === 0 ? 'Completed' : 'Pending'}</td>
+                  <td>2025-04-0{(index % 9) + 1}</td>
+                  <td>{9 + (index % 5)}:00 AM</td>
+                  <td>Technician {index + 1}</td>
+                  <td>${(index + 1) * 10}</td>
+                  <td>{index % 3 === 0 ? 'Paid' : 'Unpaid'}</td>
+                  <td>{index % 2 === 0 ? 'Good' : 'N/A'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
+
+      {/* Entries Info and Pagination below the table */}
+      <Row className="mt-2 align-items-center">
+        <Col className="text-muted" md={6}>
+          <small>Showing 1 to 10 of 267 entries</small>
+        </Col>
+        <Col className="d-flex justify-content-end" md={6}>
+          <Pagination size="sm">
+            <Pagination.First onClick={() => setCurrentPage(1)} disabled={currentPage === 1} />
+            <Pagination.Prev onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1} />
+
+            <Pagination.Item onClick={() => setCurrentPage(1)}>1</Pagination.Item>
+            <Pagination.Ellipsis />
+
+            <Pagination.Item onClick={() => setCurrentPage(10)}>10</Pagination.Item>
+            <Pagination.Item onClick={() => setCurrentPage(11)}>11</Pagination.Item>
+            <Pagination.Item active>{currentPage}</Pagination.Item>
+            <Pagination.Item onClick={() => setCurrentPage(13)}>13</Pagination.Item>
+            <Pagination.Item onClick={() => setCurrentPage(14)}>14</Pagination.Item>
+
+            <Pagination.Ellipsis />
+            <Pagination.Item onClick={() => setCurrentPage(totalPages)}>{totalPages}</Pagination.Item>
+
+            <Pagination.Next onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages} />
+            <Pagination.Last onClick={() => setCurrentPage(totalPages)} disabled={currentPage === totalPages} />
+          </Pagination>
+        </Col>
+      </Row>
+    </Card>
+  );
+};
+
+export default Profile;
